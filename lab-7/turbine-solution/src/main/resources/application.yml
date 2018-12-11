@@ -1,0 +1,23 @@
+---
+# Items that apply to ALL profiles:
+  
+# The name of our 'cluster' of servers (group of things we want to watch) will be 'default'.
+# This eliminates the need to specify a cluster name when opening a stream.
+# "appConfig" allows us to describe the service IDs we want to listen to.  
+turbine:
+  appConfig: sentence,subject,verb,article,adjective,noun
+  clusterNameExpression: "'default'"
+  
+management:
+
+  # Tell Spring Boot Actuator to expose the hystrix.stream endpoint.
+  # This is listened to by the Hystrix dashboard for monitoring purposes:
+  endpoints: 
+    web: 
+      exposure: 
+        include: 'hystrix.stream'
+        
+# To use:
+# Run as Spring Boot app.
+# Open http://localhost:8030/hystrix
+# Type in the stream name of "http://localhost:8030/turbine.stream".  Monitor stream.      
